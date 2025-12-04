@@ -19,7 +19,7 @@ namespace NoteKeeper.WebApi.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Editar(Guid id, [FromBody] EditarCategoriaPartialCommand partialCommand)
+        public async Task<ActionResult<EditarCategoriaResult>> Editar(Guid id, [FromBody] EditarCategoriaPartialCommand partialCommand)
         {
             var command = new EditarCategoriaCommand(id, partialCommand.Titulo);
 
@@ -32,9 +32,13 @@ namespace NoteKeeper.WebApi.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        public IActionResult Excluir(Guid id)
+        public async Task<ActionResult<ExcluirCategoriaResult>> Excluir(Guid id)
         {
-            return Ok();
+            var command = new ExcluirCategoriaCommand(id);
+
+            var result = await categoriaAppService.Excluir(command);
+
+            return NoContent();
         }
 
         [HttpGet("{id:guid}")]

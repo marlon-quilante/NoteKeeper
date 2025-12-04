@@ -50,6 +50,26 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
         }
 
+        public async Task<ExcluirCategoriaResult?> Excluir(ExcluirCategoriaCommand command)
+        {
+            try
+            {
+                var sucesso = await repositorioCategoria.ExcluirAsync(command.Id);
+
+                if (!sucesso)
+                    return null;
+
+                await dbContext.SaveChangesAsync();
+
+                return new ExcluirCategoriaResult();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Ocorreu um erro durante a exclusão de {@Command}", command);
+                throw;
+            }
+        }
+
         public async Task<SelecionarCategoriasResult> SelecionarTodas()
         {
             var categorias = await repositorioCategoria.SelecionarTodosAsync();
