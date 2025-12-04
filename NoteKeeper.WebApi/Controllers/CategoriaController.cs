@@ -8,19 +8,26 @@ namespace NoteKeeper.WebApi.Controllers
     public class CategoriaController(CategoriaAppService categoriaAppService) : ControllerBase
     {
         [HttpPost]
-        public async Task<ActionResult<CadastrarCategoriaResult>> Cadastrar(CadastrarCategoriaCommand command)
+        public async Task<ActionResult<CadastrarCategoriaResult>> Cadastrar([FromBody] CadastrarCategoriaCommand command)
         {
             var resultado = await categoriaAppService.Cadastrar(command);
 
             if (resultado is null)
-                return BadRequest("Não foi possível cadastrar a categoria. Tente novamente!");
+                return BadRequest("Não foi possível cadastrar a categoria. Tente novamente mais tarde!");
 
             return Ok(resultado); // HTTP Sucesso
         }
 
         [HttpPut("{id:guid}")]
-        public IActionResult Editar(Guid id)
+        public async Task<IActionResult> Editar(Guid id, [FromBody] EditarCategoriaPartialCommand partialCommand)
         {
+            var command = new EditarCategoriaCommand(id, partialCommand.Titulo);
+
+            var result = await categoriaAppService.Editar(command);
+
+            if (result is null)
+                return BadRequest("Falha ao editar. Tente novamente mais tarde!");
+
             return Ok();
         }
 
