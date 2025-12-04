@@ -10,12 +10,12 @@ namespace NoteKeeper.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<CadastrarCategoriaResult>> Cadastrar([FromBody] CadastrarCategoriaCommand command)
         {
-            var resultado = await categoriaAppService.Cadastrar(command);
+            var result = await categoriaAppService.Cadastrar(command);
 
-            if (resultado is null)
+            if (result is null)
                 return BadRequest("Não foi possível cadastrar a categoria. Tente novamente mais tarde!");
 
-            return Ok(resultado); // HTTP Sucesso
+            return Ok(result); // HTTP Sucesso
         }
 
         [HttpPut("{id:guid}")]
@@ -28,7 +28,7 @@ namespace NoteKeeper.WebApi.Controllers
             if (result is null)
                 return BadRequest("Falha ao editar. Tente novamente mais tarde!");
 
-            return Ok();
+            return Ok(result);
         }
 
         [HttpDelete("{id:guid}")]
@@ -42,9 +42,13 @@ namespace NoteKeeper.WebApi.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public IActionResult SelecionarPorId(Guid id)
+        public async Task<ActionResult<SelecionarCategoriaPorIdResult>> SelecionarPorId(Guid id)
         {
-            return Ok();
+            var query = new SelecionarCategoriaPorIdQuery(id);
+
+            var result = await categoriaAppService.SelecionarPorId(query);
+
+            return Ok(result);
         }
 
         [HttpGet]

@@ -15,6 +15,10 @@ public record EditarCategoriaResult(string Titulo);
 public record ExcluirCategoriaCommand(Guid Id);
 public record ExcluirCategoriaResult();
 
-// Seleção
+// Seleção de Todos
 public record SelecionarCategoriasResult(IReadOnlyList<SelecionarCategoriasDto> Registros);
 public record SelecionarCategoriasDto(Guid Id, string Titulo);
+
+// Seleção por Id
+public record SelecionarCategoriaPorIdQuery(Guid Id);
+public record SelecionarCategoriaPorIdResult(Guid Id, string Titulo);

@@ -70,6 +70,24 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
         }
 
+        public async Task<SelecionarCategoriaPorIdResult?> SelecionarPorId(SelecionarCategoriaPorIdQuery query)
+        {
+            try
+            {
+                var categoria = await repositorioCategoria.SelecionarPorIdAsync(query.Id);
+
+                if (categoria is null)
+                    return null;
+
+                return new SelecionarCategoriaPorIdResult(categoria.Id, categoria.Titulo);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Ocorreu um erro durante a seleção da categoria {@Query}", query);
+                throw;
+            }
+        }
+
         public async Task<SelecionarCategoriasResult> SelecionarTodas()
         {
             var categorias = await repositorioCategoria.SelecionarTodosAsync();
