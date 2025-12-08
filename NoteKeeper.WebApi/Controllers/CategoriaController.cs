@@ -13,7 +13,7 @@ namespace NoteKeeper.WebApi.Controllers
             var result = await categoriaAppService.Cadastrar(command);
 
             if (result is null)
-                return BadRequest("Não foi possível cadastrar a categoria. Tente novamente mais tarde!");
+                return BadRequest("Não foi possível cadastrar a categoria! Tente novamente mais tarde.");
 
             return Ok(result); // HTTP Sucesso
         }
@@ -26,7 +26,7 @@ namespace NoteKeeper.WebApi.Controllers
             var result = await categoriaAppService.Editar(command);
 
             if (result is null)
-                return BadRequest("Falha ao editar. Tente novamente mais tarde!");
+                return BadRequest("Falha ao editar! Tente novamente mais tarde.");
 
             return Ok(result);
         }

@@ -16,8 +16,8 @@ public record ExcluirCategoriaCommand(Guid Id);
 public record ExcluirCategoriaResult();
 
 // Seleção de Todos
-public record SelecionarCategoriasResult(IReadOnlyList<SelecionarCategoriasDto> Registros);
-public record SelecionarCategoriasDto(Guid Id, string Titulo);
+public record SelecionarCategoriasResult(IReadOnlyList<SelecionarCategoriaDto> Registros);
+public record SelecionarCategoriaDto(Guid Id, string Titulo);
 
 // Seleção por Id
 public record SelecionarCategoriaPorIdQuery(Guid Id);

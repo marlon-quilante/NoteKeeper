@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NoteKeeper.Aplicacao.ModuloCategoria;
+using NoteKeeper.Aplicacao.ModuloNota;
 
 namespace NoteKeeper.Aplicacao
 {
@@ -8,6 +9,7 @@ namespace NoteKeeper.Aplicacao
         public static IServiceCollection AddCamadaAplicacao(this IServiceCollection services)
         {
             services.AddScoped<CategoriaAppService>();
+            services.AddScoped<NotaAppService>();
 
             return services;
         }

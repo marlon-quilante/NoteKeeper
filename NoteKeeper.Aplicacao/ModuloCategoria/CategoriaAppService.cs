@@ -22,7 +22,7 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
             catch (Exception ex)
             {
-                logger.LogError(ex.Message, "Ocorreu um erro durante o cadastro de {@Command}", command);
+                logger.LogError(ex.Message, "Ocorreu um erro durante o cadastro de {@Command}.", command);
 
                 throw;
             }
@@ -45,7 +45,7 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ocorreu um erro durante a edição de {@Command}", command);
+                logger.LogError(ex, "Ocorreu um erro durante a edição de {@Command}.", command);
                 throw;
             }
         }
@@ -65,7 +65,7 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ocorreu um erro durante a exclusão de {@Command}", command);
+                logger.LogError(ex, "Ocorreu um erro durante a exclusão de {@Command}.", command);
                 throw;
             }
         }
@@ -83,7 +83,7 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Ocorreu um erro durante a seleção da categoria {@Query}", query);
+                logger.LogError(ex, "Ocorreu um erro durante a seleção da categoria {@Query}.", query);
                 throw;
             }
         }
@@ -92,7 +92,7 @@ namespace NoteKeeper.Aplicacao.ModuloCategoria
         {
             var categorias = await repositorioCategoria.SelecionarTodosAsync();
 
-            var dtos = categorias.Select(c => new SelecionarCategoriasDto(c.Id, c.Titulo)).ToImmutableList();
+            var dtos = categorias.Select(c => new SelecionarCategoriaDto(c.Id, c.Titulo)).ToImmutableList();
 
             return new SelecionarCategoriasResult(dtos);
         }
