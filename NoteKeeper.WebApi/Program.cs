@@ -14,6 +14,7 @@ namespace NoteKeeper.WebApi
             // Add services to the container.
             builder.Services.AddCamadaInfraestruturaOrm(builder.Configuration);
             builder.Services.AddCamadaInfraestruturaOrmIdentity(builder.Configuration);
+            builder.Services.AddJwtAuthentication(builder.Configuration);
             builder.Services.AddCamadaAplicacao();
 
             builder.Services.AddSwaggerConfig();
