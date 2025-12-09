@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NoteKeeper.Aplicacao.ModuloAutenticacao;
 using NoteKeeper.Aplicacao.ModuloCategoria;
 using NoteKeeper.Aplicacao.ModuloNota;
 
@@ -10,6 +11,8 @@ namespace NoteKeeper.Aplicacao
         {
             services.AddScoped<CategoriaAppService>();
             services.AddScoped<NotaAppService>();
+            services.AddScoped<AutenticacaoAppService>();
+            services.AddScoped<AccessTokenProvider>();
 
             return services;
         }
